@@ -10,6 +10,7 @@ export const fetchAcademicTerms = async (page = 1, pageSize = 10, search) => {
         }
         const { count, rows } = await AcademicTerm.findAndCountAll({
             offset,
+             limit: pageSize,
             where: whereClause
         })
         return {

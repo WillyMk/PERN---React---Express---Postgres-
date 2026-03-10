@@ -11,6 +11,7 @@ export const fetchAllSubjects = async(page = 1, pageSize = 10, search) => {
 
         const { count, rows} = Subject.findAndCountAll({
             offset,
+            limit: pageSize,
             where: whereClause
         })
         return {

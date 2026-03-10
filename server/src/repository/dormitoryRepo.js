@@ -10,6 +10,7 @@ export const fetchAllDormitories = async (page = 1, pageSize = 10, search) => {
         }
         const { count, rows } = await Dormitory.findAndCountAll({
             offset,
+             limit: pageSize,
             where: whereClause,
         })
         return {

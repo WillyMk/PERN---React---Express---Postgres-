@@ -10,6 +10,7 @@ export const fetchAllTeacherDuties = async(page = 1, pageSize = 10, search) => {
         }
         const { count, rows} = await TeacherDuty.findAndCountAll({
             offset,
+            limit: pageSize,
             where: whereClause
         })
 

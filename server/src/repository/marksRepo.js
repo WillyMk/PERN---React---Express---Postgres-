@@ -10,6 +10,7 @@ export const fetchAllMarks = async(page= 1, pageSize = 10, search) => {
         }
         const { count, rows} = await Marks.findAndCountAll({
             offset,
+            limit: pageSize,
             where: whereClause
         })
         return {
