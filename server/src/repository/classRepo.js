@@ -11,16 +11,16 @@ export const fetchAllClassRooms = async (page = 1, pageSize = 10, search, level)
                 ]
             })
         };
-        const classes = await ClassRoom.findAndCountAll({
+        const { count, rows} = await ClassRoom.findAndCountAll({
             offset,
             limit: pageSize,
             where: whereClause
         });
         return {
-            totalElements: classes.count,
-            totalPages: Math.ceil(classes.count / pageSize),
+            totalElements: count,
+            totalPages: Math.ceil(count / pageSize),
             currentPage: page,
-            classRooms: classes.rows
+            classRooms: rows
         }
     } catch (error) {
         console.log(error)
