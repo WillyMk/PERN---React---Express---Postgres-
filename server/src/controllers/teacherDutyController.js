@@ -1,0 +1,27 @@
+import { createTeacherDuty, fetchAllTeacherDuties } from "../repository/teacherDutyRepo.js";
+
+export const fetchTeacherDuties = async(req, res) => {
+    try{ 
+        let page = parseInt(req.query?.page) || 1;
+        let pageSize = parseInt(req.query?.pageSize) || 10;
+        let search = req.query?.search || null;
+        let teacherDuties = await fetchAllTeacherDuties(page, pageSize, search);
+        res.status(200).res.json({ success: true, content: teacherDuties, message: "Teacher duties fetched successfully" });
+    }catch(error){
+        res.status(500).json({ success: false, message: "Error fetching teacher duties" });
+    }
+}
+
+export const saveTeacherDuty = async(req, res) => {
+    try{
+        const { day } = req.body;
+        if(day !== "MONDAY" || day !== "TUESDAY" || day !== "WEDNESDAY" || day !== "THURSDAY" || day !== "FRIDAY" || day !== "SATURDAY" || day !== "SUNDAY"){
+            return res.status(400).json({ success: false, message: "Invalid day provided" });
+        }
+        const teacherDuty = await createTeacherDuty(req.body);
+        res.status(201).json({ success: true, message: "Teacher duty created successfully", data: teacherDuty });
+    }
+    catch(error){
+        res.status(500).json({ success: false, message: "Error saving teacher duty" });
+    }
+}

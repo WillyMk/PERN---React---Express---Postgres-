@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: school_db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: school
+    ports:
+      - "5431:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+  server:
+    container_name: school_backend
+    build: ./server
+    restart: always
+    image: school_backend_image
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: 12345
+      DB_NAME: school
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  client:
+    container_name: school_frontend
+    build: ./client
+    restart: always
+    image: school_frontend_image
+    ports: 
+      - "5173:5173"
+    depends_on: 
+      - server
+    volumes: 
+      - ./client:/app
+      - /app/node_modules
+
+  pgadmin:
+    container_name: school_pgadmin
+    image: dpage/pgadmin4
+    ports: 
+      - "5051:80"
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=wilsonkaroki6205@gmail.com    # Login email for pgAdmin
+      - PGADMIN_DEFAULT_PASSWORD=admin              # Login password for pgAdmin
+      - PGADMIN_CONFIG_SERVER_MODE=False            # Run in desktop mode (not server)
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False  # Skip master password after login
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
