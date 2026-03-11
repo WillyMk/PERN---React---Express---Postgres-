@@ -47,20 +47,61 @@ export const login = async (req, res) => {
           success: false,
         });
     }
-    const token = jwt.sign(
+    const accessToken = jwt.sign(
       { id: user.id, role: user.role },
       process.env.JWT_TOKEN_SECRET,
-      { expiresIn: "3h" },
+      { expiresIn: "20m" },
+    );
+    
+    const refreshToken = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_REFRESH_SECRET,
+      { expiresIn: "2d" },
     );
     const { password: _, ...safeUser } = user.toJSON();
     return res
       .status(200)
       .json({
         message: "User logged in successfully",
-        data: { token, user: safeUser },
+        data: { accessToken, refreshToken,  user: safeUser },
         success: true,
       });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+export const refreshToken = (req, res) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    return res.status(401).json({
+      success: false,
+      message: "Refresh token required"
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(
+      refreshToken,
+      process.env.JWT_REFRESH_SECRET
+    );
+
+    const newAccessToken = jwt.sign(
+      { id: decoded.id },
+      process.env.JWT_ACCESS_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    return res.json({
+      success: true,
+      accessToken: newAccessToken
+    });
+
+  } catch (error) {
+    return res.status(403).json({
+      success: false,
+      message: "Invalid refresh token"
+    });
   }
 };
