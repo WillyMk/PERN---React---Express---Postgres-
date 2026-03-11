@@ -4,14 +4,23 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import fs from "fs";
+import path from "path";
+import morgan from "morgan";
 import sequelize from "./src/config/database.js";
 import routes from "./src/routes/index.js";
 
 const app = express();
 
+const logStream = fs.createWriteStream(
+  path.join("access.log"),
+  { flags: "a" }
+);
+
 app.use(cors());
 app.use(express.json());
 app.use(helmet())
+app.use(morgan("combined", { stream: logStream }));
 app.use(express.urlencoded({ extended: true}))
 
 app.use("/api/v1", routes);
