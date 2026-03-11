@@ -9,6 +9,7 @@ import path from "path";
 import morgan from "morgan";
 import sequelize from "./src/config/database.js";
 import routes from "./src/routes/index.js";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -17,6 +18,12 @@ const logStream = fs.createWriteStream(
   { flags: "a" }
 );
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+
+app.use("/api/v1", limiter);
 app.use(cors());
 app.use(express.json());
 app.use(helmet())
