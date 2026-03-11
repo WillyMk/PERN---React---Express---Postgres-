@@ -23,8 +23,7 @@ export const fetchAllClassRooms = async (page = 1, pageSize = 10, search, level)
             classRooms: rows
         }
     } catch (error) {
-        console.log(error)
-        throw new Error("Error fetching classrooms");
+        throw error;
     }
 }
 

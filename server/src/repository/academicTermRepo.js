@@ -20,7 +20,7 @@ export const fetchAcademicTerms = async (page = 1, pageSize = 10, search) => {
             data: rows
         }
     }catch(error){
-        console.log(error);
+        throw error;
     }
 }
 

@@ -7,7 +7,7 @@ export const fetchTeacherDuties = async(req, res) => {
         let teacherDuties = await fetchAllTeacherDuties(page, pageSize, search);
         res.status(200).res.json({ success: true, content: teacherDuties, message: "Teacher duties fetched successfully" });
     }catch(error){
-        res.status(500).json({ success: false, message: "Error fetching teacher duties" });
+        res.status(500).json({ success: false, error: error });
     }
 }
 
@@ -21,6 +21,6 @@ export const saveTeacherDuty = async(req, res) => {
         res.status(201).json({ success: true, message: "Teacher duty created successfully", data: teacherDuty });
     }
     catch(error){
-        res.status(500).json({ success: false, message: "Error saving teacher duty" });
+        res.status(500).json({ success: false, error: error });
     }
 }

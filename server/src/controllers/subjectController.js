@@ -8,7 +8,7 @@ export const fetchSubjects = async(req, res) => {
         let subjects = await fetchAllSubjects(page, pageSize, search);
         res.status(200).res.json({ success: true, content: subjects, message: "Subjects fetched successfully" });
     }catch(error) {
-       res.status(500).json({ success: false, message: "Error fetching subjects" });
+       res.status(500).json({ success: false, error: error });
     }
 }
 
@@ -19,6 +19,6 @@ export const saveSubject = async(req, res) => {
         res.status(201).json({ success: true, message: "Subject created successfully", data: subject });
 
     }catch(error){
-        res.status(500).json({ success: false, message: "Error saving subjects" });
+        res.status(500).json({ success: false, error: error });
     }
 }

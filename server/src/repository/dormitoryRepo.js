@@ -20,7 +20,6 @@ export const fetchAllDormitories = async (page = 1, pageSize = 10, search) => {
             data: rows
         }
     } catch (error) {
-        console.log(error);
         throw error;
     }
 }  
@@ -40,7 +39,6 @@ export const createDormitory = async(dormData) => {
         const dormitory = await Dormitory.create(dormData);
         return dormitory;
     }catch(error){
-        console.log(error);
         throw error;
     }
 }
@@ -54,7 +52,7 @@ export const updateDormitory = async(id, dormitoryData) => {
         await dorm.update(dormitoryData);
         return dorm;
     }catch(error){
-        console.log(error);
+       throw error;
     }
 }
 

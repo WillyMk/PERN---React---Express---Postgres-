@@ -8,7 +8,7 @@ export const fetchDomitories = async(req, res) => {
         let dorms = await fetchAllDormitories(page, pageSize, search);
         res.status(200).res.json({ success: true, content: dorms, message: "Dormitorues fetched successfully" });
     }catch(error) {
-        consolele.log(error);
+        res.status(500).json({ success: false, error: error });
     }
 }
 
@@ -19,7 +19,6 @@ export const saveDormitory = async(req, res) => {
         res.status(201).json({ success: true, message: "Dormitory created successfully", data: dormitory });
 
     }catch(error){
-        console.log(error);
-        res.status(500).json({ success: false, message: "Error saving dorms" });
+        res.status(500).json({ success: false, error: error });
     }
 }

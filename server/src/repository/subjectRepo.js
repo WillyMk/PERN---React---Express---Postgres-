@@ -21,7 +21,7 @@ export const fetchAllSubjects = async(page = 1, pageSize = 10, search) => {
             data: rows
         }
      }catch(error){
-        console.log(error);
+        
         throw error;
      }
 }
@@ -41,7 +41,7 @@ export const  createSubject = async(subjectData) => {
         const subject = await Subject.create(subjectData);
         return subject;
     }catch(error){
-        console.log(error);
+        
         throw new Error("Error creating subject");
     }
 }

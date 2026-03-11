@@ -20,7 +20,7 @@ export const fetchAllMarks = async(page= 1, pageSize = 10, search) => {
             data: rows
         }
     }catch(error){
-        console.log(error);
+        throw error;
     }
 }
 
@@ -29,6 +29,6 @@ export const createMarks = async(marksData) => {
         const marks = await Marks.create(marksData);
         return marks;
     }catch(error){
-        console.log(error);
+        throw error;
     }
 }

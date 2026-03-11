@@ -23,7 +23,6 @@ export const fetchAllTeachers = async (page = 1, pageSize = 10, search) => {
             data: rows,
         }
     } catch (error) {
-        console.log(error)
         throw error;
     }
 }
@@ -33,7 +32,6 @@ export const createTeacher = async (teacherData) => {
         const teacher = await Teacher.create(teacherData);
         return teacher;
     }catch(error) {
-        console.log(error);
         throw error;
     }
 }

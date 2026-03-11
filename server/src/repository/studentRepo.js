@@ -5,7 +5,6 @@ export const createStudent = async(studentData) => {
         let student = await Student.create(studentData);
         return student;
     }catch(error) {
-        console.log(error)
         throw error;
     }
 }
@@ -34,7 +33,6 @@ export const fetchAllStudents = async(page = 1, pageSize = 10, search, level) =>
             data: rows,
         }
     }catch(error) {
-        console.log(error)
         throw error;
     }
 }

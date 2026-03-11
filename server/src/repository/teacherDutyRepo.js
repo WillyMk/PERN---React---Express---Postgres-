@@ -21,8 +21,7 @@ export const fetchAllTeacherDuties = async(page = 1, pageSize = 10, search) => {
             data: rows
         }
     }catch(error){
-        console.log(error);
-        throw new Error("Error fetching teacher duties");
+       throw error;
     }
 }
 
@@ -31,7 +30,6 @@ export const createTeacherDuty = async(teacherDutyData) => {
         const duty = await TeacherDuty.create(teacherDutyData);
         return duty;
     }catch(error) {
-        console.log(error);
-        throw new Error("Error creating teacher duty");
+        throw error;
     }
 }

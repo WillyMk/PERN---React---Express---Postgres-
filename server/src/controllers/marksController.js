@@ -11,7 +11,7 @@ export const fetchStudentMarks = async (req, res) => {
         const marks = await fetchAllMarks(page, pageSize, search);
         res.status(200).json({ success: true, data: marks, message: "Marks fetched successfully" })
     } catch (error) {
-        res.status(500).json({ error: "Error creating marks" })
+       res.status(500).json({ success: false, error: error });
     }
 }
 
@@ -28,6 +28,6 @@ export const saveMarks = async (req, res) => {
         res.status(201).json({ success: true, data: marks, message: "Marks saved successfully" })
 
     } catch (error) {
-        res.status(500).json({ error: "Error saving marks" });
+        res.status(500).json({ success: false, error: error });
     }
 }

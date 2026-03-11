@@ -9,7 +9,7 @@ export const fetchStudents = async(req, res) => {
         let students = await fetchAllStudents(page, pageSize, search, level);
         res.status(200).json({ success: true, content: students, message: "Students fetched successfully" });
     }catch(error) {
-        res.status(500).json({error: "Error fetching students data"})
+        res.status(500).json({ success: false, error: error });
     }
 }
 
@@ -28,7 +28,6 @@ export const saveStudents = async(req, res) => {
         res.status(201).json({ success: true, message: "Student created successfully", data: student });
 
     }catch(error){
-        console.log(error);
-        res.status(500).json({ success: false, message: "Error saving students" });
+        res.status(500).json({ success: false, error: error });
     }
 }
