@@ -52,11 +52,12 @@ export const login = async (req, res) => {
       process.env.JWT_TOKEN_SECRET,
       { expiresIn: "3h" },
     );
+    const { password: _, ...safeUser } = user.toJSON();
     return res
       .status(200)
       .json({
         message: "User logged in successfully",
-        data: { token, user },
+        data: { token, user: safeUser },
         success: true,
       });
   } catch (error) {

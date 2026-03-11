@@ -3,7 +3,7 @@ import { fetchTeachers, saveTeacher } from "../../controllers/teacherController.
 const router = express.Router();
 
 
-router.get("/teachers", fetchTeachers);
-router.post("/teacher", saveTeacher);
+router.get("/teachers",authorizeRoles("admin", "teacher"), fetchTeachers);
+router.post("/teacher",authorizeRoles("admin"), saveTeacher);
 
 export default router;

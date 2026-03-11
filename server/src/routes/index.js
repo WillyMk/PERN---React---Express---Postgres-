@@ -8,10 +8,12 @@ import studentsRoutes from "./routes/students.js";
 import subjectRoutes from "./routes/subject.js";
 import teacherDutyRoutes from "./routes/teacherDuty.js";
 import teachersRoutes from "./routes/teachers.js";
+import { authenticate } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.use("/", userRoutes);
+router.use(authenticate)
 router.use("/", academicTermRoutes);
 router.use("/", classroomRoutes);
 router.use("/", dormitoryRoutes);
