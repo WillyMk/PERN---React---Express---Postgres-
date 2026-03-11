@@ -1,10 +1,9 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { createTeacherDuty, fetchAllTeacherDuties } from "../repository/teacherDutyRepo.js";
 
 export const fetchTeacherDuties = async(req, res) => {
     try{ 
-        let page = parseInt(req.query?.page) || 1;
-        let pageSize = parseInt(req.query?.pageSize) || 10;
-        let search = req.query?.search || null;
+        const { page, pageSize, search } = validateQueryFields
         let teacherDuties = await fetchAllTeacherDuties(page, pageSize, search);
         res.status(200).res.json({ success: true, content: teacherDuties, message: "Teacher duties fetched successfully" });
     }catch(error){

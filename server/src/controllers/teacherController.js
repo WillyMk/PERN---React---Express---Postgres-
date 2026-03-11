@@ -1,11 +1,10 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { createTeacher, fetchAllTeachers } from "../repository/teacherRepo.js";
 import { getUserById } from "../repository/user.js";
 
 export const fetchTeachers = async(req, res) => {
     try{ 
-        let page = parseInt(req.query?.page) || 1;
-        let pageSize = parseInt(req.query?.pageSize) || 10;
-        let search = req.query?.search || null;
+        const { page, pageSize, search } = validateQueryFields
         let teachers = await fetchAllTeachers(page, pageSize, search);
         res.status(200).res.json({ success: true, content: teachers, message: "Teachers fetched successfully" });
     }catch(error) {

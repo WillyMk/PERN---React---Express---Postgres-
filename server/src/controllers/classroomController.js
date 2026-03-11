@@ -1,11 +1,9 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { createClassRoom, fetchAllClasses } from "../repository/classRepo.js";
 
 export const fetchClassRooms = async(req, res) => {
     try{
-        let page = (req?.query?.page) || 1
-        let pageSize = (req?.query.pageSize) || 10;
-        let search = req?.query?.search || null;
-        let level = req?.query?.level || null;
+        const { page, pageSize, search, level } = validateQueryFields
 
         let classes = await fetchAllClasses(page, pageSize, search, level);
         res.status(200).json({success: true, message: "Classes fetched successfully", content: classes})

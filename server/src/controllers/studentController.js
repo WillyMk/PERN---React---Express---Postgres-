@@ -1,17 +1,15 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { fetchClassRoomId } from "../repository/classRepo.js";
 import { createStudent, fetchAllStudents } from "../repository/studentRepo.js";
 import { getUserById } from "../repository/user.js";
 
 export const fetchStudents = async(req, res) => {
     try{ 
-        let page = parseInt(req.query?.page) || 1;
-        let pageSize = parseInt(req.query?.pageSize) || 10;
-        let search = req.query?.search || null;
-        let level = req.query?.level || null;
+        const { page, pageSize, search, level } = validateQueryFields
         let students = await fetchAllStudents(page, pageSize, search, level);
-        res.status(200).res.json({ success: true, content: students, message: "Students fetched successfully" });
+        res.status(200).json({ success: true, content: students, message: "Students fetched successfully" });
     }catch(error) {
-        consolele.log(error);
+        res.status(500).json({error: "Error fetching students data"})
     }
 }
 

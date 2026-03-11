@@ -1,3 +1,4 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { fetchAcademicTermById } from "../repository/academicTermRepo.js";
 import { createMarks, fetchAllMarks } from "../repository/marksRepo.js";
 import { fetchStudentById } from "../repository/studentRepo.js";
@@ -5,9 +6,7 @@ import { fetchSubjectById } from "../repository/subjectRepo.js";
 
 export const fetchStudentMarks = async (req, res) => {
     try {
-        let page = req?.query?.page || 1;
-        let pageSize = req?.query?.pageSize || 10
-        let search = req?.query?.search || null;
+        const { page, pageSize, search } = validateQueryFields
 
         const marks = await fetchAllMarks(page, pageSize, search);
         res.status(200).json({ success: true, data: marks, message: "Marks fetched successfully" })

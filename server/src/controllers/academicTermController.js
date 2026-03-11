@@ -1,10 +1,9 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { createAcademicTerm, fetchAcademicTerms } from "../repository/academicTermRepo.js";
 
 export const fetchTerms = async(req, res) => {
     try{ 
-        let page = parseInt(req.query?.page) || 1;
-        let pageSize = parseInt(req.query?.pageSize) || 10;
-        let search = req.query?.search || null;
+        const { page, pageSize, search } = validateQueryFields
         let terms = await fetchAcademicTerms(page, pageSize, search);
         res.status(200).res.json({ success: true, content: terms, message: "Terms fetched successfully" });
     }catch(error) {

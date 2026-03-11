@@ -1,11 +1,10 @@
+import { validateQueryFields } from "../../utils/paramsValidator.js";
 import { createDormitory, fetchAllDormitories } from "../repository/dormitoryRepo.js";
 
 
 export const fetchDomitories = async(req, res) => {
     try{ 
-        let page = parseInt(req.query?.page) || 1;
-        let pageSize = parseInt(req.query?.pageSize) || 10;
-        let search = req.query?.search || null;
+        const { page, pageSize, search } = validateQueryFields
         let dorms = await fetchAllDormitories(page, pageSize, search);
         res.status(200).res.json({ success: true, content: dorms, message: "Dormitorues fetched successfully" });
     }catch(error) {
