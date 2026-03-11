@@ -5,7 +5,7 @@ export const createuser = async(userData) => {
         const user = await User.create(userData);
         return user;
     } catch(error){
-        throw error;
+        console.error(error)
     }
 }
 
@@ -14,7 +14,7 @@ export const getUserByEmail = async(email) => {
         const user = await User.findOne({ where: { email } });
         return user;
     } catch(error) {
-        throw error;
+         console.error(error)
     }
 }
 
@@ -26,6 +26,6 @@ export const getUserById = async(id) => {
         }
         return user;
     }catch(error){
-        throw error;
+         console.error(error)
     }
 }
