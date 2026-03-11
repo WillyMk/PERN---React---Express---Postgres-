@@ -3,7 +3,7 @@ import { createTeacherDuty, fetchAllTeacherDuties } from "../repository/teacherD
 
 export const fetchTeacherDuties = async(req, res) => {
     try{ 
-        const { page, pageSize, search } = validateQueryFields
+        const { page, pageSize, search } = validateQueryFields(req)
         let teacherDuties = await fetchAllTeacherDuties(page, pageSize, search);
         res.status(200).res.json({ success: true, content: teacherDuties, message: "Teacher duties fetched successfully" });
     }catch(error){

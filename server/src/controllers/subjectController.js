@@ -4,7 +4,7 @@ import { createSubject, fetchAllSubjects } from "../repository/subjectRepo.js";
 
 export const fetchSubjects = async(req, res) => {
     try{ 
-        const { page, pageSize, search } = validateQueryFields
+        const { page, pageSize, search } = validateQueryFields(req)
         let subjects = await fetchAllSubjects(page, pageSize, search);
         res.status(200).res.json({ success: true, content: subjects, message: "Subjects fetched successfully" });
     }catch(error) {

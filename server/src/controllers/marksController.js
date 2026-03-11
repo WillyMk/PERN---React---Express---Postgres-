@@ -6,7 +6,7 @@ import { fetchSubjectById } from "../repository/subjectRepo.js";
 
 export const fetchStudentMarks = async (req, res) => {
     try {
-        const { page, pageSize, search } = validateQueryFields
+        const { page, pageSize, search } = validateQueryFields(req)
 
         const marks = await fetchAllMarks(page, pageSize, search);
         res.status(200).json({ success: true, data: marks, message: "Marks fetched successfully" })

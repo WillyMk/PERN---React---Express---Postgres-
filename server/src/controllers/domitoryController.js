@@ -4,7 +4,7 @@ import { createDormitory, fetchAllDormitories } from "../repository/dormitoryRep
 
 export const fetchDomitories = async(req, res) => {
     try{ 
-        const { page, pageSize, search } = validateQueryFields
+        const { page, pageSize, search } = validateQueryFields(req)
         let dorms = await fetchAllDormitories(page, pageSize, search);
         res.status(200).res.json({ success: true, content: dorms, message: "Dormitorues fetched successfully" });
     }catch(error) {

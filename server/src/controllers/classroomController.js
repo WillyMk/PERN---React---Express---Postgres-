@@ -3,7 +3,7 @@ import { createClassRoom, fetchAllClasses } from "../repository/classRepo.js";
 
 export const fetchClassRooms = async(req, res) => {
     try{
-        const { page, pageSize, search, level } = validateQueryFields
+        const { page, pageSize, search, level } = validateQueryFields(req)
 
         let classes = await fetchAllClasses(page, pageSize, search, level);
         res.status(200).json({success: true, message: "Classes fetched successfully", content: classes})

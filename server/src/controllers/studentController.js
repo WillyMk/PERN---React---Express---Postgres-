@@ -5,7 +5,7 @@ import { getUserById } from "../repository/user.js";
 
 export const fetchStudents = async(req, res) => {
     try{ 
-        const { page, pageSize, search, level } = validateQueryFields
+        const { page, pageSize, search, level } = validateQueryFields(req)
         let students = await fetchAllStudents(page, pageSize, search, level);
         res.status(200).json({ success: true, content: students, message: "Students fetched successfully" });
     }catch(error) {
