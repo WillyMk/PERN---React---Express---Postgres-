@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { getUserByEmail, getUserById, createuser } from "../repository/user.js";
+import { getUserByEmail, createuser } from "../repository/user.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
     const accessToken = jwt.sign(
       { id: user.id, role: user.role },
       process.env.JWT_TOKEN_SECRET,
-      { expiresIn: "20m" },
+      { expiresIn: "15m" },
     );
     
     const refreshToken = jwt.sign(
