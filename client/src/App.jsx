@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import Layout from './components/layout/Layout';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Dashboard from './components/layout/Dashboard';
+import ProtectedRoute from './views/auth/ProtectedRoute';
+import Layout from './views/layout/Layout';
+import Login from './views/auth/Login';
+import Register from './views/auth/Register';
+import Dashboard from './views/layout/Dashboard';
 // Import other page components here
 // import Students from './pages/Students';
 // import Teachers from './pages/Teachers';
