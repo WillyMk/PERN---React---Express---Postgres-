@@ -52,7 +52,7 @@ export const login = async (req, res) => {
       process.env.JWT_TOKEN_SECRET,
       { expiresIn: "15m" },
     );
-    
+
     const refreshToken = jwt.sign(
       { id: user.id, role: user.role },
       process.env.JWT_REFRESH_SECRET,
@@ -61,10 +61,14 @@ export const login = async (req, res) => {
     const { password: _, ...safeUser } = user.toJSON();
     return res
       .status(200)
+      .set({
+        "Authorization": `Bearer ${accessToken}`,
+        "x-refresh-token": refreshToken
+      })
       .json({
         message: "User logged in successfully",
-        data: { accessToken, refreshToken,  user: safeUser },
-        success: true,
+        data: { user: safeUser },
+        success: true
       });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false });
@@ -93,10 +97,14 @@ export const refreshToken = (req, res) => {
       { expiresIn: "15m" }
     );
 
-    return res.json({
-      success: true,
-      accessToken: newAccessToken
-    });
+    return res
+      .status(200)
+      .set({
+        "Authorization": `Bearer ${newAccessToken}`,
+      })
+      .json({
+        success: true
+      });
 
   } catch (error) {
     return res.status(403).json({

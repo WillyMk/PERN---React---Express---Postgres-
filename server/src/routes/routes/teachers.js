@@ -1,5 +1,6 @@
 import express from "express";
 import { fetchTeachers, saveTeacher } from "../../controllers/teacherController.js";
+import { authorizeRoles } from "../../middleware/roleBasedMiddleware.js";
 const router = express.Router();
 
 
