@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { createSubject, fetchAllSubjects } from "../repository/subjectRepo.js";
 
 

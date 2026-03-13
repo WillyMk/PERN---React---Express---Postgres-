@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { createTeacher, fetchAllTeachers } from "../repository/teacherRepo.js";
 import { getUserById } from "../repository/user.js";
 

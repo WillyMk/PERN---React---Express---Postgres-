@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { createDormitory, fetchAllDormitories } from "../repository/dormitoryRepo.js";
 
 

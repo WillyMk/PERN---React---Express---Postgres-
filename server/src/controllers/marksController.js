@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { fetchAcademicTermById } from "../repository/academicTermRepo.js";
 import { createMarks, fetchAllMarks } from "../repository/marksRepo.js";
 import { fetchStudentById } from "../repository/studentRepo.js";

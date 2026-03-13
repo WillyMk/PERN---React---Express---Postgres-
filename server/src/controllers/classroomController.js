@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { createClassRoom, fetchAllClassRooms } from "../repository/classRepo.js";
 
 export const fetchClassRooms = async(req, res) => {

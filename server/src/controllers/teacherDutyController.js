@@ -1,4 +1,4 @@
-import { validateQueryFields } from "../../utils/paramsValidator.js";
+import { validateQueryFields } from "../utils/paramsValidator.js";
 import { createTeacherDuty, fetchAllTeacherDuties } from "../repository/teacherDutyRepo.js";
 
 export const fetchTeacherDuties = async(req, res) => {
